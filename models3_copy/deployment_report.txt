@@ -1,0 +1,63 @@
+
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                   ACCIDENT SEVERITY PREDICTION - FINAL REPORT                 ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+PROJECT SUMMARY
+───────────────────────────────────────────────────────────────────────────────
+Target Variable: Accident_Severity
+Problem Type: Multi-class Classification
+Dataset Size: 270941 records
+Training Set: 216752 records
+Test Set: 54189 records
+
+DATA PROCESSING
+───────────────────────────────────────────────────────────────────────────────
+Original Features: 56
+Selected Features: 20
+Feature Reduction: 64.3%
+
+Selected Features: 1st_Road_Class, Age_Band_of_Driver, Age_of_Casualty, Age_of_Driver, Casualty_Severity, Day_of_Week, Driver_Home_Area_Type, Engine_Capacity_(CC), Hit_Object_off_Carriageway, Junction_Control, Light_Conditions, Number_of_Casualties, Number_of_Vehicles, Police_Force, Sex_of_Casualty, Sex_of_Driver, Skidding_and_Overturning, Urban_or_Rural_Area, Vehicle_Manoeuvre, Vehicle_Type
+
+BEST MODEL PERFORMANCE
+───────────────────────────────────────────────────────────────────────────────
+Model: Bagging
+Test Accuracy: 0.9695 (96.95%)
+Train Accuracy: 1.0000
+Overfitting Gap: 0.0305
+
+ALL MODELS RANKING
+───────────────────────────────────────────────────────────────────────────────
+ Rank                 Model  Test Accuracy
+    1               Bagging       0.969496
+    2     Gradient Boosting       0.967632
+    3         Random Forest       0.963369
+    4           Extra Trees       0.962059
+    5 HistGradient Boosting       0.939157
+    6              AdaBoost       0.934415
+
+DEPLOYMENT ARTIFACTS
+───────────────────────────────────────────────────────────────────────────────
+✓ Model File: best_model_Bagging.pkl
+✓ Feature Scaler: scaler.pkl
+✓ Label Encoders: label_encoders.pkl
+✓ Feature Names: feature_names.pkl
+
+USAGE INSTRUCTIONS FOR DEPLOYMENT
+───────────────────────────────────────────────────────────────────────────────
+1. Load the model:
+   model = joblib.load('models/best_model_Bagging.pkl')
+   scaler = joblib.load('models/scaler.pkl')
+   features = joblib.load('models/feature_names.pkl')
+
+2. Prepare new data:
+   - Ensure categorical variables are properly encoded
+   - Use the same feature names as defined
+   - Scale the features using the saved scaler
+
+3. Make predictions:
+   X_new_scaled = scaler.transform(X_new[features])
+   predictions = model.predict(X_new_scaled)
+
+TIMESTAMP: 2025-12-21 17:41:50
+═══════════════════════════════════════════════════════════════════════════════
